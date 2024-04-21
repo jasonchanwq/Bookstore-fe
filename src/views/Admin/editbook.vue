@@ -4,7 +4,7 @@
           <b-col sm="12">
               <iq-card>
                   <template v-slot:headerTitle>
-                      <h4 class="card-title">Add Books</h4>
+                      <h4 class="card-title">Edit Books</h4>
                   </template>
                   <template v-slot:body>
                       <form @submit.prevent="Submit">
@@ -50,10 +50,11 @@ import axios from '../../axios.js'
 import { core } from '../../config/pluginInit'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'addbook',
+  name: 'editbook',
   mounted () {
     core.index()
     this.fetchGenres() // 在组件挂载时获取类别数据
+    this.getData()
   },
   computed: {
     ...mapGetters({
@@ -67,7 +68,8 @@ export default {
       selectedGenreId: '', // 保存选择的类别ID
       bookImage: null,
       bookPrice: '',
-      bookStock: ''
+      bookStock: '',
+      bookId: ''
     }
   },
   methods: {
@@ -90,20 +92,15 @@ export default {
           price: this.bookPrice
         }
 
-        // 发送 POST 请求到服务器接口
-        const response = await axios.post('books', formData, {
+        const response = await axios.put(`books/${this.bookId}`, formData, {
           headers: {
             'Content-Type': 'application/json'
           }
         })
 
         console.log('Book added:', response)
-        // 清空表单数据
-        this.bookName = ''
-        this.selectedGenreId = ''
-        this.bookImage = null
-        this.bookPrice = ''
-        this.bookStock = ''
+        // 返回上一个路由
+        this.$router.go(-1)
 
         // 在这里可以添加成功后的处理逻辑
       } catch (error) {
@@ -114,6 +111,21 @@ export default {
     handleFileChange (event) {
       // 处理文件选择变化事件
       this.bookImage = event.target.files[0] // 保存文件到 bookImage 属性
+    },
+    getData () {
+      const id = this.$route.params.id
+      axios.get(`/books/${id}`)
+        .then(response => {
+        // 更新组件的数据
+          this.bookName = response.name
+          this.selectedGenreId = response.genre._id
+          this.bookPrice = response.price
+          this.bookStock = response.numberInStock
+          this.bookId = response._id
+        })
+        .catch(error => {
+          console.error('Error fetching book:', error)
+        })
     }
   }
 }

@@ -27,5 +27,15 @@ module.exports = {
     config.module.rule('pdf')
       .test(/\.pdf$/)
       .use('file-loader').loader('file-loader')
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://calm-mountain-10484-296975bbfc99.herokuapp.com/',
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: { '^/api': '' }
+      }
+    }
   }
 }

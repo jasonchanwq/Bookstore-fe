@@ -21,6 +21,7 @@ const Book = () => import('../views/Admin/books')
 const Author = () => import('../views/Admin/author')
 const AddCategory = () => import('../views/Admin/addcategory')
 const AddBook = () => import('../views/Admin/addbook')
+const EditBook = () => import('../views/Admin/editbook')
 const AddAuthor = () => import('../views/Admin/addauthor')
 /* UIElements View */
 const UiAlerts = () => import('../views/UiElements/UiAlerts.vue')
@@ -212,6 +213,12 @@ const adminchildRoutes = (prop) => [
     name: 'addbook',
     component: AddBook,
     meta: { auth: true, name: 'Addbook' }
+  },
+  {
+    path: '/edit-book/:id',
+    name: 'editbook',
+    component: EditBook,
+    meta: { auth: true, name: 'EditBook' }
   },
   {
     path: '/add-author',

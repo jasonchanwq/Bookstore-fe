@@ -18,10 +18,7 @@
                                         <th style="width: 12%;">Book Image</th>
                                         <th style="width: 15%;">Book Name</th>
                                         <th style="width: 15%;">Book Catrgory</th>
-                                        <th style="width: 15%;">Book Author</th>
-                                        <th style="width: 18%;">Book Description</th>
                                         <th style="width: 7%;">Book Price</th>
-                                        <th style="width: 7%;">Book pdf</th>
                                         <th style="width: 15%;">Action</th>
                                     </tr>
                                 </thead>
@@ -30,17 +27,12 @@
                                         <td>{{index+1}}</td>
                                         <td><img class="img-fluid rounded" :src="book.src" alt=""></td>
                                         <td>{{book.name}}</td>
-                                        <td>{{book.category}}</td>
-                                        <td>{{book.author}}</td>
-                                        <td>
-                                          <p class="mb-0">{{book.description}}</p>
-                                        </td>
-                                        <td>{{book.author}}</td>
-                                        <td><a href="/book-pdf"><i class="ri-file-fill text-secondary font-size-18"></i></a></td>
+                                        <td>{{book.genre.name}}</td>
+                                        <td>{{book.price}}</td>
                                         <td>
                                            <div class="flex align-items-center list-user-action">
-                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="/add-book"><i class="ri-pencil-line"></i></a>
-                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="Edit" :href="`/edit-book/${book._id}`"><i class="ri-pencil-line"></i></a>
+                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" @click="deleteBook(book._id)" ><i class="ri-delete-bin-line"></i></a>
                                           </div>
                                         </td>
                                     </tr>
@@ -56,10 +48,12 @@
 <script>
 import { core } from '../../config/pluginInit'
 import { mapGetters } from 'vuex'
+import axios from '../../axios.js'
 export default {
   name: 'Book',
   mounted () {
     core.index()
+    this.getData()
   },
   computed: {
     ...mapGetters({
@@ -69,91 +63,30 @@ export default {
   watch: {
   },
   methods: {
+    getData () {
+      const that = this
+      axios.get('/books')
+        .then(response => {
+          that.books = response
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    deleteBook (id) {
+      axios.delete('/books/' + id)
+        .then(response => {
+          this.getData()
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    }
   },
+  // require('../../assets/images/browse-books/01.jpg')
   data () {
     return {
-      books: [
-        {
-          src: require('../../assets/images/browse-books/01.jpg'),
-          name: 'Reading on the Worlds',
-          category: 'General Books',
-          author: 'Jhone Steben',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$89'
-        },
-        {
-          src: require('../../assets/images/browse-books/02.jpg'),
-          name: 'The Catcher in the Rye',
-          category: 'History Books',
-          author: 'Fritz Wold',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$89'
-        },
-        {
-          src: require('../../assets/images/browse-books/03.jpg'),
-          name: 'Little Black Book',
-          category: 'Comic Books',
-          author: 'John Klok',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$129'
-        },
-        {
-          src: require('../../assets/images/browse-books/04.jpg'),
-          name: 'Take On The Risk',
-          category: 'General Books',
-          author: 'George Strong',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$89'
-        },
-        {
-          src: require('../../assets/images/browse-books/05.jpg'),
-          name: 'Absteact On Background',
-          category: 'Film & Photography',
-          author: 'Ichae Semos',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$99'
-        },
-        {
-          src: require('../../assets/images/browse-books/06.jpg'),
-          name: 'Find The Wave Book',
-          category: 'General Books',
-          author: 'Fidel Martin',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$100'
-        },
-        {
-          src: require('../../assets/images/browse-books/07.jpg'),
-          name: 'See the More Story',
-          category: 'Horror Story',
-          author: 'Jules Boutin',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$79'
-        },
-        {
-          src: require('../../assets/images/browse-books/08.jpg'),
-          name: 'The Wikde Book',
-          category: ' Computers & Internet',
-          author: 'Kusti Franti',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$89'
-        },
-        {
-          src: require('../../assets/images/browse-books/09.jpg'),
-          name: 'Conversion Erik Routley',
-          category: 'Sports',
-          author: 'Argele Intili',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$79'
-        },
-        {
-          src: require('../../assets/images/browse-books/10.jpg'),
-          name: 'The Leo Dominica',
-          category: 'General Books',
-          author: 'Henry Jurk',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet',
-          price: '$99'
-        }
-      ]
+      books: []
     }
   }
 }

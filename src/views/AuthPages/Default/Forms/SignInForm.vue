@@ -42,6 +42,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from '../../../../axios.js'
 
 export default {
   name: 'SignInForm',
@@ -63,24 +64,21 @@ export default {
     })
   },
   methods: {
-    onSubmit () {
-      let selectedUser = this.stateUsers.find(user => {
-        return (user.email === this.user.email && user.password === this.user.password)
-      }) || null
-      if (selectedUser) {
-        this.$store.dispatch('Setting/authUserAction', {
-          auth: true,
-          user: {
-            id: selectedUser.uid,
-            name: selectedUser.name,
-            mobileNo: null,
-            email: selectedUser.email,
-            profileImage: null
-          }
+    async onSubmit () {
+      try {
+        // 发起登录请求
+        const response = await axios.post('/auth', {
+          email: this.user.email,
+          password: this.user.password
         })
-        localStorage.setItem('user', JSON.stringify(selectedUser))
-        localStorage.setItem('access_token', selectedUser.token)
+        localStorage.setItem('x-auth-token', response)
+        const user = await axios.get('/users/me')
+        localStorage.setItem('app-userInfo', JSON.stringify(user))
         this.$router.push({ name: 'shop.home' })
+      } catch (error) {
+        // 处理登录失败的逻辑
+        console.error('Error signing in:', error.response)
+        // 在这里可以根据错误情况做相应的处理，例如显示错误信息给用户
       }
     }
   }

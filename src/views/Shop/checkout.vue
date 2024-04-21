@@ -14,7 +14,7 @@
                                        <b-row class="align-items-center">
                                           <b-col sm="2">
                                              <span class="checkout-product-img">
-                                             <a href="#"><img class="img-fluid rounded" :src="list.src" alt=""></a>
+                                             <a href="#"><img class="img-fluid rounded" :src="require('../../assets/images/checkout/01.jpg')" alt=""></a>
                                              </span>
                                           </b-col>
                                           <b-col sm="4">
@@ -271,10 +271,12 @@
 <script>
 import { core } from '../../config/pluginInit'
 import { mapGetters } from 'vuex'
+import axios from '../../axios.js'
 export default {
   name: 'Checkout',
   mounted () {
     core.index()
+    this.getData()
   },
   computed: {
     ...mapGetters({
@@ -284,6 +286,29 @@ export default {
   watch: {
   },
   methods: {
+    getData () {
+      const that = this
+      const user = JSON.parse(localStorage.getItem('app-userInfo'))
+      axios.get(`/carts/${user._id}`)
+        .then(response => {
+          that.lists = response
+        })
+        .catch(_error => {
+          axios.post(`/carts`, { customer_id: user._id })
+            .then(response => {
+              axios.get(`/carts/${user._id}`, { user })
+                .then(response => {
+                  that.lists = response.items
+                })
+                .catch(error => {
+                  console.error(error)
+                })
+            })
+            .catch(error => {
+              console.error(error)
+            })
+        })
+    }
   },
   data () {
     return {
@@ -301,29 +326,7 @@ export default {
           title: 'Return policy (Easy Return.)'
         }
       ],
-      lists: [
-        {
-          icon: 'ri-close-fill',
-          src: require('../../assets/images/checkout/01.jpg'),
-          title: 'The Raze night book',
-          text: 'In stock',
-          price: '$180.00'
-        },
-        {
-          icon: 'ri-close-fill',
-          src: require('../../assets/images/checkout/02.jpg'),
-          title: 'Harsh Reality book',
-          text: 'In stock',
-          price: '$250.00'
-        },
-        {
-          icon: 'ri-close-fill',
-          src: require('../../assets/images/checkout/03.jpg'),
-          title: 'The House in the Fog',
-          text: 'In stock',
-          price: '$399.00'
-        }
-      ]
+      lists: []
     }
   }
 }

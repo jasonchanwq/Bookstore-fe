@@ -47,6 +47,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from '../../../../axios.js'
 
 export default {
   name: 'SignUpForm',
@@ -65,7 +66,10 @@ export default {
     }
   }),
   methods: {
-    onSubmit () {
+    async onSubmit () {
+      // 发起注册请求
+      const response = await axios.post('/users/registerUser', this.user)
+      console.log('Registered user:', response.data)
       this.$store.dispatch('Setting/addUserAction', this.user)
       this.$router.replace('/auth/sign-in1')
     }
