@@ -19,10 +19,10 @@
                                           </b-col>
                                           <b-col sm="4">
                                              <div class="checkout-product-details">
-                                                <h5>{{list.title}}</h5>
-                                                <p class="text-success">{{list.text}}</p>
+                                                <h5>{{list.book_id.name}}</h5>
+                                                <p class="text-success">{{list.book_id.genre.name}}</p>
                                                 <div class="price">
-                                                   <h5>{{list.price}}</h5>
+                                                   <h5>${{list.book_id.price}}</h5>
                                                 </div>
                                              </div>
                                           </b-col>
@@ -31,17 +31,17 @@
                                                 <b-col sm="10">
                                                    <b-row class="align-items-center mt-2">
                                                       <b-col sm="7" md="6">
-                                                         <button type="button" class="qty-btn" id="btn-minus"><i class="fa fa-minus"></i></button>
-                                                         <input type="text" id="quantity" value="0">
-                                                         <button type="button" class="qty-btn" id="btn-plus"><i class="fa fa-plus"></i></button>
+                                                         <button type="button" class="qty-btn" id="btn-minus" @click="changeItemNum(list,-1)"><i class="fa fa-minus"></i></button>
+                                                         <input type="text" id="quantity" :value="list.quantity">
+                                                         <button type="button" class="qty-btn" id="btn-plus" @click="changeItemNum(list ,1)"><i class="fa fa-plus"></i></button>
                                                       </b-col>
                                                       <b-col sm="5" md="6">
-                                                         <span class="product-price">{{list.price}}</span>
+                                                         <span class="product-price">${{list.quantity * list.book_id.price}}</span>
                                                       </b-col>
                                                    </b-row>
                                                 </b-col>
                                                 <b-col sm="2">
-                                                   <a href="#" class="text-dark font-size-20"><i class="ri-delete-bin-7-fill"></i></a>
+                                                   <a href="#" class="text-dark font-size-20" @click="deleteItem(list)"><i class="ri-delete-bin-7-fill"></i></a>
                                                 </b-col>
                                              </b-row>
                                           </b-col>
@@ -63,28 +63,12 @@
                                  <p><b>Price Details</b></p>
                                  <div class="d-flex justify-content-between mb-1">
                                     <span>Total MRP</span>
-                                    <span>$829</span>
-                                 </div>
-                                 <div class="d-flex justify-content-between mb-1">
-                                    <span>Bag Discount</span>
-                                    <span class="text-success">-20$</span>
-                                 </div>
-                                 <div class="d-flex justify-content-between mb-1">
-                                    <span>Estimated Tax</span>
-                                    <span>$15</span>
-                                 </div>
-                                 <div class="d-flex justify-content-between mb-1">
-                                    <span>EMI Eligibility</span>
-                                    <span><a href="#">Details</a></span>
-                                 </div>
-                                 <div class="d-flex justify-content-between">
-                                    <span>Delivery Charges</span>
-                                    <span class="text-success">Free</span>
+                                    <span>${{totalPrice}}</span>
                                  </div>
                                  <hr>
                                  <div class="d-flex justify-content-between">
                                     <span class="text-dark"><strong>Total</strong></span>
-                                    <span class="text-dark"><strong>$824</strong></span>
+                                    <span class="text-dark"><strong>${{totalPrice}}</strong></span>
                                  </div>
                                  <router-link id="place-order" to="/checkout-address" class="btn btn-primary d-block mt-3 next text-white">Place order</router-link>
                               </template>
@@ -289,9 +273,16 @@ export default {
     getData () {
       const that = this
       const user = JSON.parse(localStorage.getItem('app-userInfo'))
+      if (!(user?._id)) {
+        // 跳转 auth/sign-in1
+        this.$router.push({ name: 'auth1.sign-in1' })
+        return
+      }
       axios.get(`/carts/${user._id}`)
         .then(response => {
-          that.lists = response
+          that.lists = response.items
+          that.totalPrice = response.totalPrice
+          that.cartId = response._id
         })
         .catch(_error => {
           axios.post(`/carts`, { customer_id: user._id })
@@ -299,6 +290,8 @@ export default {
               axios.get(`/carts/${user._id}`, { user })
                 .then(response => {
                   that.lists = response.items
+                  that.totalPrice = response.totalPrice
+                  that.cartId = response._id
                 })
                 .catch(error => {
                   console.error(error)
@@ -307,6 +300,20 @@ export default {
             .catch(error => {
               console.error(error)
             })
+        })
+    },
+    changeItemNum (item, num) {
+      const that = this
+      axios.put(`/carts/${that.cartId}/${item.book_id._id}`, { quantity: item.quantity + num })
+        .then(response => {
+          that.getData()
+        })
+    },
+    deleteItem (item) {
+      const that = this
+      axios.delete(`/carts/${that.cartId}/${item.book_id._id}`)
+        .then(response => {
+          that.getData()
         })
     }
   },
@@ -326,7 +333,9 @@ export default {
           title: 'Return policy (Easy Return.)'
         }
       ],
-      lists: []
+      lists: [],
+      totalPrice: 0,
+      cartId: ''
     }
   }
 }

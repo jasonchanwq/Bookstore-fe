@@ -20,18 +20,6 @@
         "is_icon_class": true,
         "icon": "las la-house-damage"
       },
-      
-      {
-        "title": "Book Page",
-        "name": "sidebar.bookPage",
-        "is_active": false,
-        "link": {
-          "name": "shop.book"
-        },
-        "class_name": "",
-        "is_icon_class": true,
-        "icon": "ri-book-line"
-      },
       {
         "title": "Checkout",
         "name": "sidebar.checkout",
@@ -77,20 +65,6 @@
         "is_icon_class": true,
         "icon": "ri-book-2-line"
       }
-    ]
-  },
-  {
-    "title": "User",
-    "name": "sidebar.user",
-    "is_heading": false,
-    "is_active": false,
-    "link": "",
-    "class_name": "",
-    "is_icon_class": true,
-    "icon": "las la-user-tie",
-    "children": [
-      
-
     ]
   }
 ]

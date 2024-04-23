@@ -18,7 +18,7 @@
                                  <div class="col-6 p-0 position-relative image-overlap-shadow">
                                     <a href="#"><img class="img-fluid rounded w-100" src="../../assets/images/browse-books/01.jpg" alt=""></a>
                                     <div class="view-book">
-                                       <router-link to="/book-page" class="btn btn-sm btn-white">View Book</router-link>
+                                       <!-- <router-link to="/book-page" class="btn btn-sm btn-white">View Book</router-link> -->
                                     </div>
                                  </div>
                                  <div class="col-6">
@@ -39,7 +39,7 @@
                                        <h6><b>${{ book.price }}</b></h6>
                                     </div>
                                     <div class="iq-product-action">
-                                       <a href="#"><i class="ri-shopping-cart-2-fill text-primary"></i></a>
+                                       <a href="#" @click="addItem(book)"><i class="ri-shopping-cart-2-fill text-primary"></i></a>
                                        <a href="#" class="ml-2"><i class="ri-heart-fill text-danger"></i></a>
                                     </div>
                                  </div>
@@ -111,6 +111,19 @@ export default {
         })
         .catch(error => {
           console.error(error)
+        })
+    },
+    addItem (book) {
+      console.log('book=====>', book)
+      const user = JSON.parse(localStorage.getItem('app-userInfo'))
+      if (!(user?._id)) {
+        // 跳转 auth/sign-in1
+        this.$router.push({ name: 'auth1.sign-in1' })
+        return
+      }
+      axios.post(`/carts/addItem`, { customer_id: user._id, items: [{ book_id: book._id, quantity: 1 }] })
+        .then(response => {
+          alert('Added to cart')
         })
     }
   },
