@@ -55,6 +55,28 @@
         "icon": "ri-list-check-2"
       },
       {
+        "title": "Order List",
+        "name": "sidebar.orderList",
+        "is_active": false,
+        "link": {
+          "name": "admin.orderlist"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-list-check-2"
+      },
+      {
+        "title": "Customer List",
+        "name": "sidebar.customerList",
+        "is_active": false,
+        "link": {
+          "name": "admin.customerlist"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-list-check-2"
+      },
+      {
         "title": "Books",
         "name": "sidebar.books",
         "is_active": false,

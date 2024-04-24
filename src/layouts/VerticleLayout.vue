@@ -10,12 +10,12 @@
         <template slot="responsiveRight">
          <ul class="navbar-nav ml-auto navbar-list">
                         <li class="nav-item nav-icon search-content">
-                           <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
+                            <!-- <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                               <i class="ri-search-line"></i>
-                           </a>
+                           </a> -->
                            <form action="#" class="search-box p-0">
-                              <input type="text" class="text search-input" placeholder="Type here to search...">
-                              <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                              <!-- <input type="text" class="text search-input" placeholder="Type here to search...">
+                              <a class="search-link" href="#"><i class="ri-search-line"></i></a> -->
                            </form>
                         </li>
                         <!-- <li class="nav-item nav-icon">

@@ -14,7 +14,7 @@
                                        <b-row class="align-items-center">
                                           <b-col sm="2">
                                              <span class="checkout-product-img">
-                                             <a href="#"><img class="img-fluid rounded" :src="require('../../assets/images/checkout/01.jpg')" alt=""></a>
+                                             <a href="#"><img class="img-fluid rounded" :src="list.bookinfo.image" alt=""></a>
                                              </span>
                                           </b-col>
                                           <b-col sm="4">
@@ -70,7 +70,7 @@
                                     <span class="text-dark"><strong>Total</strong></span>
                                     <span class="text-dark"><strong>${{totalPrice}}</strong></span>
                                  </div>
-                                 <router-link id="place-order" to="/checkout-address" class="btn btn-primary d-block mt-3 next text-white">Place order</router-link>
+                                 <router-link id="place-order" :to="{ path: '/checkout-address', query: { cartId: cartId } }"  class="btn btn-primary d-block mt-3 next text-white">Place order</router-link>
                               </template>
                            </iq-card>
                            <iq-card bodyClass="p-0 iq-checkout-policy ">
@@ -280,7 +280,13 @@ export default {
       }
       axios.get(`/carts/${user._id}`)
         .then(response => {
-          that.lists = response.items
+          that.lists = response.items.map(item => {
+            const bookinfo = this.books.find(book => book.id === item.bookId)
+            return {
+              ...item,
+              bookinfo
+            }
+          })
           that.totalPrice = response.totalPrice
           that.cartId = response._id
         })
@@ -289,7 +295,13 @@ export default {
             .then(response => {
               axios.get(`/carts/${user._id}`, { user })
                 .then(response => {
-                  that.lists = response.items
+                  that.lists = response.items.map(item => {
+                    const bookinfo = this.books.find(book => book.id === item.bookId)
+                    return {
+                      ...item,
+                      bookinfo
+                    }
+                  })
                   that.totalPrice = response.totalPrice
                   that.cartId = response._id
                 })
@@ -300,6 +312,14 @@ export default {
             .catch(error => {
               console.error(error)
             })
+        })
+
+      axios.get('/books')
+        .then(response => {
+          that.books = response
+        })
+        .catch(error => {
+          console.error(error)
         })
     },
     changeItemNum (item, num) {
@@ -335,7 +355,8 @@ export default {
       ],
       lists: [],
       totalPrice: 0,
-      cartId: ''
+      cartId: '',
+      books: []
     }
   }
 }

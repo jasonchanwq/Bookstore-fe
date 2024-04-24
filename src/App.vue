@@ -15,4 +15,7 @@ export default {
 </script>
 <style lang="scss">
   @import "assets/scss/style.scss";
+  .img-fluid {
+    max-height: 100px !important; /* 图片最大高度为容器高度 */
+  }
 </style>

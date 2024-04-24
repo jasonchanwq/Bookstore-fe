@@ -4,16 +4,16 @@
        <b-col sm="12">
          <iq-card>
            <template v-slot:headerTitle>
-             <h4 class="card-title">Add Categories</h4>
+             <h4 class="card-title">Edit Customers</h4>
            </template>
            <template v-slot:body>
              <form @submit.prevent="submitForm">
                <div class="form-group">
-                 <label>Category Name:</label>
-                 <input type="text" class="form-control" v-model="categoryName">
+                 <label>Customer Name:</label>
+                 <input type="text" class="form-control" v-model="customerName">
                </div>
                <!-- <div class="form-group">
-                 <label>Category Description:</label>
+                 <label>Customer Description:</label>
                  <textarea class="form-control" rows="4"></textarea>
                </div> -->
                <button type="submit" class="btn btn-primary">Submit</button>
@@ -32,9 +32,11 @@ import { mapGetters } from 'vuex'
 import axios from '../../axios.js'
 
 export default {
-  name: 'addcategory',
+  name: 'addcustomer',
   mounted () {
     core.index()
+    this.getId()
+    this.getCustomerName()
   },
   computed: {
     ...mapGetters({
@@ -43,17 +45,32 @@ export default {
   },
   data () {
     return {
-      categoryName: '' // 添加一个数据绑定，用于保存表单输入的分类名称
+      id: '',
+      customerName: '' // 添加一个数据绑定，用于保存表单输入的分类名称
     }
   },
   methods: {
+    getId () {
+      // 从 URL 中获取参数
+      const params = new URLSearchParams(window.location.search)
+      this.id = params.get('id')
+    },
+    getCustomerName () {
+      axios.get(`/genres/${this.id}`)
+        .then(response => {
+          this.customerName = response.name
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
     submitForm () {
-      // 执行提交逻辑，保存类别名称
-      axios.post(`/genres`, { name: this.categoryName })
+      // 执行提交逻辑
+      axios.put(`/genres/${this.id}`, { name: this.customerName })
         .then(response => {
           // 处理成功响应
-          // 导航到类别列表页面
-          this.$router.push('/admin/category-list')
+          // 导航到目标路由，并传递参数
+          this.$router.push({ path: '/admin/customer-list', query: { } })
         })
         .catch(error => {
           console.error(error)

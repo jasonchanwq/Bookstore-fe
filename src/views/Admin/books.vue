@@ -25,7 +25,7 @@
                                 <tbody>
                                     <tr v-for="(book,index) in books" :key="index">
                                         <td>{{index+1}}</td>
-                                        <td><img class="img-fluid rounded" :src="book.src" alt=""></td>
+                                        <td><img class="img-fluid rounded" :src="book.image" alt=""></td>
                                         <td>{{book.name}}</td>
                                         <td>{{book.genre.name}}</td>
                                         <td>{{book.price}}</td>

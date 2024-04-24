@@ -87,7 +87,8 @@ export default {
           name: this.bookName,
           genreId: this.selectedGenreId,
           numberInStock: this.bookStock,
-          price: this.bookPrice
+          price: this.bookPrice,
+          image: this.bookImage
         }
 
         // 发送 POST 请求到服务器接口
@@ -113,7 +114,17 @@ export default {
     },
     handleFileChange (event) {
       // 处理文件选择变化事件
-      this.bookImage = event.target.files[0] // 保存文件到 bookImage 属性
+      const file = event.target.files[0] // 获取选择的文件
+      const reader = new FileReader() // 创建FileReader对象
+
+      // 当文件读取完成时触发load事件
+      reader.onload = () => {
+        // 将文件内容转换为Base64编码并保存到bookImage属性
+        this.bookImage = reader.result
+      }
+
+      // 读取文件内容并触发load事件
+      reader.readAsDataURL(file)
     }
   }
 }

@@ -16,21 +16,20 @@
                                     <tr>
                                         <th width="5%">No</th>
                                         <th width="20%">Category Name</th>
-                                        <th width="65%">Category Description</th>
                                         <th width="10%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(book,index) in books" :key="index">
+                                    <tr v-for="(genre,index) in genres" :key="index">
                                         <td>{{index+1}}</td>
-                                        <td>{{book.title}}</td>
-                                        <td>
+                                        <td>{{genre.name}}</td>
+                                        <!-- <td>
                                           <p class="mb-0">{{book.description}}</p>
-                                        </td>
+                                        </td> -->
                                         <td>
                                            <div class="flex align-items-center list-user-action">
-                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="/add-category"><i class="ri-pencil-line"></i></a>
-                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="Edit" :href="`/edit-category?id=${genre._id}`"><i class="ri-pencil-line"></i></a>
+                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" @click="deleteGenre(genre._id)"><i class="ri-delete-bin-line"></i></a>
                                           </div>
                                         </td>
                                     </tr>
@@ -46,10 +45,12 @@
 <script>
 import { core } from '../../config/pluginInit'
 import { mapGetters } from 'vuex'
+import axios from '../../axios.js'
 export default {
   name: 'Categorylist',
   mounted () {
     core.index()
+    this.getData()
   },
   computed: {
     ...mapGetters({
@@ -59,50 +60,27 @@ export default {
   watch: {
   },
   methods: {
+    getData () {
+      const that = this
+      axios.get('/genres')
+        .then(response => {
+          that.genres = response
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    deleteGenre (id) {
+      const that = this
+      axios.delete(`/genres/${id}`)
+        .then(response => {
+          that.getData()
+        })
+    }
   },
   data () {
     return {
-      books: [
-        {
-          title: 'General Books',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'History Books',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Horror Story',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Arts Books',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Film & Photography',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Business & Economics',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Comics & Mangas',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Computers & Internet',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Sports',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        },
-        {
-          title: 'Travel & Tourism',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet'
-        }
+      genres: [
       ]
     }
   }

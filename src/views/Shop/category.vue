@@ -68,11 +68,11 @@
                                  </li>
                                  <li class="search-menu-opt">
                                     <div class="iq-search-bar search-book d-flex align-items-center">
-                                       <form action="#" class="searchbox">
+                                       <!-- <form action="#" class="searchbox">
                                           <input type="text" class="text search-input" placeholder="search here...">
                                           <a class="search-link" href="#"><i class="ri-search-line"></i></a>
                                        </form>
-                                       <button type="submit" class="btn btn-primary search-data ml-2">Search</button>
+                                       <button type="submit" class="btn btn-primary search-data ml-2">Search</button> -->
                                     </div>
                                  </li>
                               </ul>

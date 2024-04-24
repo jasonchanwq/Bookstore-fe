@@ -16,7 +16,7 @@
                            <div class="iq-card-body p-0">
                               <div class="d-flex align-items-center">
                                  <div class="col-6 p-0 position-relative image-overlap-shadow">
-                                    <a href="#"><img class="img-fluid rounded w-100" src="../../assets/images/browse-books/01.jpg" alt=""></a>
+                                    <a href="#"><img class="img-fluid rounded w-100" :src="book.image" alt=""></a>
                                     <div class="view-book">
                                        <!-- <router-link to="/book-page" class="btn btn-sm btn-white">View Book</router-link> -->
                                     </div>

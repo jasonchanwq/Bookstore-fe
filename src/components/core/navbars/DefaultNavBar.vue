@@ -28,8 +28,8 @@
         </div>
         <div class="iq-search-bar">
           <form action="#" class="searchbox">
-            <input type="text" class="text search-input" placeholder="Search Here...">
-            <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+            <!-- <input type="text" class="text search-input" placeholder="Search Here...">
+            <a class="search-link" href="#"><i class="ri-search-line"></i></a> -->
           </form>
         </div>
         <b-navbar-toggle target="nav-collapse" class="mr-2">
