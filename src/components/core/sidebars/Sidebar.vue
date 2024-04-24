@@ -23,7 +23,7 @@
                      <div class="iq-card-body">
                         <div class="sidebarbottom-content">
                            <div class="image"><img src="../../../assets/images/page-img/side-bkg.png" alt=""></div>
-                           <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Become Membership</button>
+
                         </div>
                      </div>
                   </iq-card>
