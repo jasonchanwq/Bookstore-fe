@@ -22,8 +22,6 @@
                   <iq-card>
                      <div class="iq-card-body">
                         <div class="sidebarbottom-content">
-                           <div class="image"><img src="../../../assets/images/page-img/side-bkg.png" alt=""></div>
-
                         </div>
                      </div>
                   </iq-card>

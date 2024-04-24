@@ -1,7 +1,6 @@
 <template>
   <div>
     <Loader />
-    <Customizer @onLogo="changeLogo" @toggle="sidebarMini" @animationChange="routerAnimationChange" />
     <div class="wrapper">
       <!-- Sidebar  -->
       <Sidebar :items="verticalMenu" :logo="logo" :onlyLogo="onlyLogo" :onlyLogoText="onlyLogoText" @toggle="sidebarMini" :toggleButton="toggleSideIcon" :sidebarGroupTitle="sidebarGroupTitle" />
@@ -308,14 +307,12 @@ import DefaultNavBar from '../components/core/navbars/DefaultNavBar'
 import SideBarItems from '../StaticData/json/SideBar'
 import profile from '../assets/images/user/1.jpg'
 import darkLoader from '../assets/images/darkMode/dark-logo.png'
-import Customizer from './Components/Customizer'
 import WhiteLogo from '../assets/images/logo.png'
 import LayoutFooter from './Components/LayoutFooter'
 export default {
   name: 'VerticleLayout',
   components: {
     LayoutFooter,
-    Customizer,
     Loader,
     Sidebar,
     DefaultNavBar
