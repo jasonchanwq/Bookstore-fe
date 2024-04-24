@@ -222,7 +222,7 @@
                            <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
                               <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
                               <div class="caption">
-                                 <h6 class="mb-1 line-height">{{userInfo.name}}</h6>
+                                 <h6 class="mb-1 line-height">{{userInfo?.name || 'login'}}</h6>
                                  <p class="mb-0 text-primary"></p>
                               </div>
                            </a>
@@ -230,7 +230,7 @@
                               <div class="iq-card shadow-none m-0">
                                  <div class="iq-card-body p-0 ">
                                     <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white line-height">Hello {{userInfo.name}}</h5>
+                                       <h5 class="mb-0 text-white line-height">Hello {{userInfo?.name || 'login'}}</h5>
                                        <span class="text-white font-size-12">Available</span>
                                     </div>
                                     <router-link to="/user/profile" class="iq-sub-card iq-bg-primary-hover">
