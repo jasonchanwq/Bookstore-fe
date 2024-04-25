@@ -110,11 +110,11 @@ export default {
           that.books = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     addItem (book) {
-      console.log('book=====>', book)
+      //console..log('book=====>', book)
       const user = JSON.parse(localStorage.getItem('app-userInfo'))
       if (!(user?._id)) {
         this.$router.push({ name: 'auth1.sign-in1' })

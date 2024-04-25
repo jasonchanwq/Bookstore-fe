@@ -78,7 +78,7 @@ export default {
         const response = await axios.get('/genres')
         this.genres = response
       } catch (error) {
-        console.error('Error fetching genres:', error)
+        //console..error('Error fetching genres:', error)
       }
     },
     async Submit () {
@@ -97,11 +97,11 @@ export default {
           }
         })
 
-        console.log('Book added:', response)
+        //console..log('Book added:', response)
 
         this.$router.go(-1)
       } catch (error) {
-        console.error('Error adding book:', error.response.data)
+        //console..error('Error adding book:', error.response.data)
       }
     },
     handleFileChange (event) {
@@ -125,7 +125,7 @@ export default {
           this.bookId = response._id
         })
         .catch(error => {
-          console.error('Error fetching book:', error)
+          //console..error('Error fetching book:', error)
         })
     }
   }

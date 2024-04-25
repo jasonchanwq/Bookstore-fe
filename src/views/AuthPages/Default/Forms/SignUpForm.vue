@@ -68,7 +68,7 @@ export default {
   methods: {
     async onSubmit () {
       const response = await axios.post('/users/registerUser', this.user)
-      console.log('Registered user:', response.data)
+      //console..log('Registered user:', response.data)
       alert('Sign up successful! ')
       this.$store.dispatch('Setting/addUserAction', this.user)
       this.$router.replace('/auth/sign-in1')

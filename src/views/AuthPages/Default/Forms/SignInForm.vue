@@ -76,7 +76,7 @@ export default {
         this.$router.push({ name: 'shop.home' })
       } catch (error) {
         alert('Wrong lD or password')
-        console.error('Error signing in:', error.response)
+        //console..error('Error signing in:', error.response)
       }
     }
   }

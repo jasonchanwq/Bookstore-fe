@@ -53,7 +53,7 @@ export default {
           this.$router.push('/admin/category-list')
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     }
   }

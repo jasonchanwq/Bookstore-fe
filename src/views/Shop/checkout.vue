@@ -305,11 +305,11 @@ export default {
                   that.cartId = response._id
                 })
                 .catch(error => {
-                  console.error(error)
+                  //console..error(error)
                 })
             })
             .catch(error => {
-              console.error(error)
+              //console..error(error)
             })
         })
 
@@ -318,7 +318,7 @@ export default {
           that.books = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     changeItemNum (item, num) {

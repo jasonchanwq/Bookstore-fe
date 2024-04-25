@@ -60,7 +60,7 @@ export default {
           this.categoryName = response.name
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     submitForm () {
@@ -69,7 +69,7 @@ export default {
           this.$router.push({ path: '/admin/category-list', query: { } })
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     }
   }

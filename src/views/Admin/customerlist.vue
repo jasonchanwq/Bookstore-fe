@@ -107,7 +107,7 @@ export default {
           that.customers = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     showOrderDetails (order) {

@@ -112,14 +112,14 @@ export default {
           that.orders = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
       axios.get('/books')
         .then(response => {
           that.books = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     showOrderDetails (order) {

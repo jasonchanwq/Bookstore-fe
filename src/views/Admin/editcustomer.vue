@@ -68,7 +68,7 @@ export default {
           this.defaultBillingAddress = response.defaultBillingAddress
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     submitForm () {
@@ -77,7 +77,7 @@ export default {
           this.$router.push({ path: '/admin/customer-list', query: { } })
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     cancel () {

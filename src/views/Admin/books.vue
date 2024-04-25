@@ -70,7 +70,7 @@ export default {
           that.books = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     deleteBook (id) {
@@ -79,7 +79,7 @@ export default {
           this.getData()
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     }
   },

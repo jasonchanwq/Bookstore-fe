@@ -67,7 +67,7 @@ export default {
           that.genres = response
         })
         .catch(error => {
-          console.error(error)
+          //console..error(error)
         })
     },
     deleteGenre (id) {
