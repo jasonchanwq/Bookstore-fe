@@ -62,7 +62,7 @@
                                  <hr>
                                  <p><b>Price Details</b></p>
                                  <div class="d-flex justify-content-between mb-1">
-                                    <span>Total MRP</span>
+                                    <span>Total SGD</span>
                                     <span>${{totalPrice}}</span>
                                  </div>
                                  <hr>
