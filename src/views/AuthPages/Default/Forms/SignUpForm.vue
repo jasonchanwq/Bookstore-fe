@@ -67,7 +67,6 @@ export default {
   }),
   methods: {
     async onSubmit () {
-      // 发起注册请求
       const response = await axios.post('/users/registerUser', this.user)
       console.log('Registered user:', response.data)
       this.$store.dispatch('Setting/addUserAction', this.user)

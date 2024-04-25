@@ -43,16 +43,13 @@ export default {
   },
   data () {
     return {
-      categoryName: '' // 添加一个数据绑定，用于保存表单输入的分类名称
+      categoryName: ''
     }
   },
   methods: {
     submitForm () {
-      // 执行提交逻辑，保存类别名称
       axios.post(`/genres`, { name: this.categoryName })
         .then(response => {
-          // 处理成功响应
-          // 导航到类别列表页面
           this.$router.push('/admin/category-list')
         })
         .catch(error => {

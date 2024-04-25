@@ -66,7 +66,6 @@ export default {
   methods: {
     async onSubmit () {
       try {
-        // 发起登录请求
         const response = await axios.post('/auth', {
           email: this.user.email,
           password: this.user.password
@@ -76,9 +75,7 @@ export default {
         localStorage.setItem('app-userInfo', JSON.stringify(user))
         this.$router.push({ name: 'shop.home' })
       } catch (error) {
-        // 处理登录失败的逻辑
         console.error('Error signing in:', error.response)
-        // 在这里可以根据错误情况做相应的处理，例如显示错误信息给用户
       }
     }
   }

@@ -85,8 +85,7 @@
   </div>
 </template>
 <script>
-// import darkLoader from '../../assets/images/darkMode/dark-logo.gif'
-// import loader from '../../assets/images/loader.gif'
+
 import darkLogo from '../../assets/images/darkMode/dark-logo.png'
 import Logo from '../../assets/images/logo.png'
 import RightSideBar from '../../components/core/rightsidebar/RightSideBar'
@@ -144,8 +143,7 @@ export default {
     changeColor (code, event) {
       this.setColor = code.primary
       document.documentElement.style.setProperty('--iq-primary', code.primary)
-      // var element = document.getElementById('color-box')
-      // element.classList.add('iq-colormark')
+
       document.documentElement.style.setProperty(
         '--iq-light-primary',
         code.primaryLight

@@ -5,7 +5,7 @@ const VerticleLayout = () => import('../layouts/VerticleLayout')
 const Default = () => import('../layouts/BlankLayout')
 const AuthLayout = () => import('../layouts/AuthLayouts/AuthLayout')
 /* Dashboards View */
-// const Dashboard2 = () => import('../views/Dashboards/Dashboard2')
+
 const Home = () => import('../views/Shop/home')
 const Category = () => import('../views/Shop/category')
 const Bookpage = () => import('../views/Shop/bookpage')
@@ -14,7 +14,7 @@ const Checkout = () => import('../views/Shop/checkout')
 const Wishlist = () => import('../views/Shop/wishlist')
 const Address = () => import('../views/Shop/address')
 const Payment = () => import('../views/Shop/payment')
-// admin view
+
 const Dashboard = () => import('../views/Admin/dashboard')
 const Categorylist = () => import('../views/Admin/categorylist')
 const Orderlist = () => import('../views/Admin/orderlist')
@@ -40,7 +40,7 @@ const ErrorPage = () => import('../views/Pages/ErrorPage')
 const ComingSoon = () => import('../views/Pages/ComingSoon')
 const Maintenance = () => import('../views/Pages/Maintenance')
 const TimeLine = () => import('../views/Pages/TimeLines')
-// const Pricing = () => import('../views/Pages/Pricing')
+
 const Pricing1 = () => import('../views/Pages/Pricing1')
 const BlankPage = () => import('../views/Pages/BlankPage')
 const FAQ = () => import('../views/Pages/FAQ')
@@ -330,12 +330,7 @@ const defaultlayout = (prop) => [
     meta: { auth: true, name: 'Pricing' },
     component: Pricing1
   },
-  // {
-  //   path: 'pricing-1',
-  //   name: prop + '.pricing1',
-  //   meta: { auth: true, name: 'Pricing 1' },
-  //   component: Pricing
-  // },
+
   {
     path: 'faq',
     name: prop + '.faq',

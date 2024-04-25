@@ -1,6 +1,7 @@
 <template>
   <div>
     <Loader />
+    <Customizer @onLogo="changeLogo" @toggle="sidebarMini" @animationChange="routerAnimationChange" />
     <div class="wrapper">
       <!-- Sidebar  -->
       <Sidebar :items="verticalMenu" :logo="logo" :onlyLogo="onlyLogo" :onlyLogoText="onlyLogoText" @toggle="sidebarMini" :toggleButton="toggleSideIcon" :sidebarGroupTitle="sidebarGroupTitle" />
@@ -349,7 +350,7 @@ export default {
       this.layoutSetting(to.name)
     }
   },
-  // sidebarTicket
+
   data () {
     return {
       animated: { enter: 'fadeIn', exit: 'fadeOut' },

@@ -684,11 +684,7 @@ export default {
         { '#': '2', first: 'Jacob', last: 'Thornton', handle: '@fat' },
         { '#': '3', first: 'Larry', last: 'the Bird', handle: '@twitter' }
       ]
-      // items1: [
-      //   { '#': '1' , heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell' },
-      //   { '#': '2' , heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell' },
-      //   { '#': '3' , heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell', heading: 'Cell' }
-      // ]
+
     }
   }
 }

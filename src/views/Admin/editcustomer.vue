@@ -46,12 +46,11 @@ export default {
   data () {
     return {
       id: '',
-      customerName: '' // 添加一个数据绑定，用于保存表单输入的分类名称
+      customerName: ''
     }
   },
   methods: {
     getId () {
-      // 从 URL 中获取参数
       const params = new URLSearchParams(window.location.search)
       this.id = params.get('id')
     },
@@ -65,11 +64,8 @@ export default {
         })
     },
     submitForm () {
-      // 执行提交逻辑
       axios.put(`/genres/${this.id}`, { name: this.customerName })
         .then(response => {
-          // 处理成功响应
-          // 导航到目标路由，并传递参数
           this.$router.push({ path: '/admin/customer-list', query: { } })
         })
         .catch(error => {

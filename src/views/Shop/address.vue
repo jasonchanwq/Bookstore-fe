@@ -42,7 +42,7 @@ export default {
   name: 'Address',
   mounted () {
     core.index()
-    // 在组件挂载时调用方法获取 cartId
+
     this.getCartIdFromRoute()
   },
   computed: {
@@ -52,14 +52,13 @@ export default {
   },
   data () {
     return {
-      shippingAddress: '', // 绑定 shippingAddress 输入框的值
-      billingAddress: '', // 绑定 billingAddress 输入框的值
+      shippingAddress: '',
+      billingAddress: '',
       cartId: ''
     }
   },
   methods: {
     submitOrder () {
-      // 通过 this.shippingAddress 和 this.billingAddress 获取表单值
       axios.post(`/orders`, {
         shippingAddress: this.shippingAddress,
         billingAddress: this.billingAddress,
@@ -70,7 +69,6 @@ export default {
         })
     },
     getCartIdFromRoute () {
-      // 从路由参数中获取 cartId
       const params = new URLSearchParams(window.location.search)
       this.cartId = params.get('cartId')
     }

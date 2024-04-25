@@ -18,4 +18,8 @@ export default {
   .img-fluid {
     max-height: 100px !important; /* 图片最大高度为容器高度 */
   }
+
+  .right-sidebar-toggle .setting-toggle{
+    display: none !important;
+  }
 </style>

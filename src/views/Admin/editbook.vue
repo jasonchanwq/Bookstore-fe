@@ -53,7 +53,7 @@ export default {
   name: 'editbook',
   mounted () {
     core.index()
-    this.fetchGenres() // 在组件挂载时获取类别数据
+    this.fetchGenres()
     this.getData()
   },
   computed: {
@@ -64,8 +64,8 @@ export default {
   data () {
     return {
       bookName: '',
-      genres: [], // 保存类别数据的数组
-      selectedGenreId: '', // 保存选择的类别ID
+      genres: [],
+      selectedGenreId: '',
       bookImage: null,
       bookPrice: '',
       bookStock: '',
@@ -75,16 +75,14 @@ export default {
   methods: {
     async fetchGenres () {
       try {
-        // 发送 GET 请求获取类别数据
         const response = await axios.get('/genres')
-        this.genres = response // 将类别数据保存到 genres 数组中
+        this.genres = response
       } catch (error) {
         console.error('Error fetching genres:', error)
       }
     },
     async Submit () {
       try {
-        // 构造表单数据
         const formData = {
           name: this.bookName,
           genreId: this.selectedGenreId,
@@ -100,34 +98,26 @@ export default {
         })
 
         console.log('Book added:', response)
-        // 返回上一个路由
-        this.$router.go(-1)
 
-        // 在这里可以添加成功后的处理逻辑
+        this.$router.go(-1)
       } catch (error) {
         console.error('Error adding book:', error.response.data)
-        // 在这里可以添加失败后的处理逻辑
       }
     },
     handleFileChange (event) {
-      // 处理文件选择变化事件
-      const file = event.target.files[0] // 获取选择的文件
-      const reader = new FileReader() // 创建FileReader对象
+      const file = event.target.files[0]
+      const reader = new FileReader()
 
-      // 当文件读取完成时触发load事件
       reader.onload = () => {
-        // 将文件内容转换为Base64编码并保存到bookImage属性
         this.bookImage = reader.result
       }
 
-      // 读取文件内容并触发load事件
       reader.readAsDataURL(file)
     },
     getData () {
       const id = this.$route.params.id
       axios.get(`/books/${id}`)
         .then(response => {
-        // 更新组件的数据
           this.bookName = response.name
           this.selectedGenreId = response.genre._id
           this.bookPrice = response.price

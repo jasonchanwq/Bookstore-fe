@@ -117,7 +117,6 @@ export default {
       console.log('book=====>', book)
       const user = JSON.parse(localStorage.getItem('app-userInfo'))
       if (!(user?._id)) {
-        // 跳转 auth/sign-in1
         this.$router.push({ name: 'auth1.sign-in1' })
         return
       }

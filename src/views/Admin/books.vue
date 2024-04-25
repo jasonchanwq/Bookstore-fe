@@ -83,7 +83,7 @@ export default {
         })
     }
   },
-  // require('../../assets/images/browse-books/01.jpg')
+
   data () {
     return {
       books: []

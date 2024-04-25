@@ -69,7 +69,6 @@ export const core = {
     setTimeout(() => {
       load.classList.add('d-none')
     }, 2000)
-    // $('#loading').delay(1000).fadeOut('slow')
   },
   activeRoute () {
     if (window.innerWidth < 1500) {
@@ -77,7 +76,7 @@ export const core = {
       if (wrapperMenu) {
         wrapperMenu.classList.remove('open')
         document.querySelector('body').classList.remove('sidebar-main')
-        // document.querySelector('body').classList.remove('right-sidebar-close')
+
         document.querySelector('div.right-sidebar-mini').classList.remove('right-sidebar')
       }
     }
@@ -98,18 +97,9 @@ export const core = {
     Store.dispatch('Setting/activePageAction', obj)
   },
   fixedHeader () {
-    // $(window).scroll(function () {
-    //   if ($(window).scrollTop() >= 75) {
-    //     $('.iq-top-navbar').addClass('fixed-header')
-    //   } else {
-    //     $('.iq-top-navbar').removeClass('fixed-header')
-    //   }
-    // })
-
     let position = $(window).scrollTop()
     $(window).scroll(function () {
       let scroll = $(window).scrollTop()
-      //  console.log(scroll);
 
       if (scroll < position) {
         $('.tab-menu-horizontal').addClass('menu-up')
@@ -127,29 +117,24 @@ export const core = {
   },
   ripple () {
     $(document).on('click', '.iq-waves-effect', function (e) {
-      // Remove any old one
       $('.ripple').remove()
-      // Setup
+
       let posX = $(this).offset().left
       let posY = $(this).offset().top
       let buttonWidth = $(this).width()
       let buttonHeight = $(this).height()
 
-      // Add the element
       $(this).prepend("<span class='ripple'></span>")
 
-      // Make it round!
       if (buttonWidth >= buttonHeight) {
         buttonHeight = buttonWidth
       } else {
         buttonWidth = buttonHeight
       }
 
-      // Get the center of the element
       let x = e.pageX - posX - buttonWidth / 2
       let y = e.pageY - posY - buttonHeight / 2
 
-      // Add the ripples CSS and start the animation
       $('.ripple').css({
         width: buttonWidth,
         height: buttonHeight,

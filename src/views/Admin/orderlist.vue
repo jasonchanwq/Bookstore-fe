@@ -123,10 +123,6 @@ export default {
         })
     },
     showOrderDetails (order) {
-      // Set the order details to the modal content
-      // For example:
-      // this.$refs.orderModal.$data.modalContent = order;
-      // Show the modal
       const items = order.order.items
       this.lists = items.map(item => {
         const bookinfo = this.books.find(book => book.id === item.bookId)
