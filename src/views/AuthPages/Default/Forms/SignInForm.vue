@@ -75,6 +75,7 @@ export default {
         localStorage.setItem('app-userInfo', JSON.stringify(user))
         this.$router.push({ name: 'shop.home' })
       } catch (error) {
+        alert('Wrong lD or password')
         console.error('Error signing in:', error.response)
       }
     }

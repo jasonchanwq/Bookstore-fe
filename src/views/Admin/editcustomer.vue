@@ -10,14 +10,18 @@
              <form @submit.prevent="submitForm">
                <div class="form-group">
                  <label>Customer Name:</label>
-                 <input type="text" class="form-control" v-model="customerName">
+                 <input type="text" class="form-control" v-model="name">
                </div>
-               <!-- <div class="form-group">
-                 <label>Customer Description:</label>
-                 <textarea class="form-control" rows="4"></textarea>
-               </div> -->
+               <div class="form-group">
+                 <label>defaultShippingAddress:</label>
+                 <input type="text" class="form-control" v-model="defaultShippingAddress">
+               </div>
+               <div class="form-group">
+                 <label>defaultBillingAddress:</label>
+                 <input type="text" class="form-control" v-model="defaultBillingAddress">
+               </div>
                <button type="submit" class="btn btn-primary">Submit</button>
-               <button type="reset" class="btn btn-danger">Reset</button>
+               <button class="btn btn-danger" @click="cancel">Cancel</button>
              </form>
            </template>
          </iq-card>
@@ -36,7 +40,7 @@ export default {
   mounted () {
     core.index()
     this.getId()
-    this.getCustomerName()
+    this.getInfo()
   },
   computed: {
     ...mapGetters({
@@ -46,7 +50,9 @@ export default {
   data () {
     return {
       id: '',
-      customerName: ''
+      name: '',
+      defaultShippingAddress: '',
+      defaultBillingAddress: ''
     }
   },
   methods: {
@@ -54,23 +60,29 @@ export default {
       const params = new URLSearchParams(window.location.search)
       this.id = params.get('id')
     },
-    getCustomerName () {
-      axios.get(`/genres/${this.id}`)
+    getInfo () {
+      axios.get(`/customers/${this.id}`)
         .then(response => {
-          this.customerName = response.name
+          this.name = response.name
+          this.defaultShippingAddress = response.defaultShippingAddress
+          this.defaultBillingAddress = response.defaultBillingAddress
         })
         .catch(error => {
           console.error(error)
         })
     },
     submitForm () {
-      axios.put(`/genres/${this.id}`, { name: this.customerName })
+      axios.put(`/customers/${this.id}`, { name: this.name, defaultShippingAddress: this.defaultShippingAddress, defaultBillingAddress: this.defaultBillingAddress })
         .then(response => {
           this.$router.push({ path: '/admin/customer-list', query: { } })
         })
         .catch(error => {
           console.error(error)
         })
+    },
+    cancel () {
+      // return last page -1
+      this.$router.go(-1)
     }
   }
 }

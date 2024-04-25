@@ -36,7 +36,7 @@
                               <input type="text" class="form-control" v-model="bookStock">
                           </div>
                           <button type="submit" class="btn btn-primary">Submit</button>
-                          <button type="reset" class="btn btn-danger">Reset</button>
+                          <button class="btn btn-danger" @click="cancel">Cancel</button>
                       </form>
                   </template>
               </iq-card>
@@ -102,6 +102,7 @@ export default {
         this.bookImage = null
         this.bookPrice = ''
         this.bookStock = ''
+        this.$router.go(-1)
       } catch (error) {
         console.error('Error adding book:', error.response.data)
       }
@@ -115,6 +116,10 @@ export default {
       }
 
       reader.readAsDataURL(file)
+    },
+    cancel () {
+      // return last page -1
+      this.$router.go(-1)
     }
   }
 }
