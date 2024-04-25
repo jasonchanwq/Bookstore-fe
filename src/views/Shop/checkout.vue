@@ -330,7 +330,7 @@ export default {
     },
     deleteItem (item) {
       const that = this
-      axios.delete(`/carts/${that.cartId}/${item.book_id._id}`)
+      axios.delete(`/carts/item/${that.cartId}/${item.book_id._id}`)
         .then(response => {
           that.getData()
         })
